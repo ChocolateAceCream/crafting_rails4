@@ -3,6 +3,7 @@ class HomeController < ApplicationController
         respond_to do |format|
             format.html
             format.pdf { render pdf: "contents"}
+            # render a pdf file named contents.pdf
         end
     end
 
