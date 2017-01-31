@@ -1,4 +1,4 @@
 module MailForm
     autoload :Base, "mail_form/base"
-  # Your code goes here...
+    autoload :Notifier, "mail_form/notifier"
 end
