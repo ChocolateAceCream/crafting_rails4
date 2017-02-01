@@ -1,47 +1,62 @@
-require 'test_helper'
-require 'fixtures/sample_mail'
+#---
+# Excerpted from "Crafting Rails 4 Applications",
+# published by The Pragmatic Bookshelf.
+# Copyrights apply to this code. It may not be used to create training material,
+# courses, books, articles, and the like. Contact us if you are in doubt.
+# We make no guarantees that this code is fit for any purpose.
+# Visit http://www.pragmaticprogrammer.com/titles/jvrails2 for more book information.
+#---
+require "test_helper"
+require "fixtures/sample_mail"
 
-class MailForm::Test < ActiveSupport::TestCase
-    setup do
-        ActionMailer::Base.deliveries.clear
-    end
+class MailFormTest < ActiveSupport::TestCase
+  setup do
+    ActionMailer::Base.deliveries.clear
+  end
 
-    test "delivers an email with attributes" do
-        sample = SampleMail.new
-        #Si,ulate data from the form
-        sample.email = "user@example.com"
-        sample.deliver
+  test "delivers an email with attributes" do
+    sample = SampleMail.new
+    # Simulate data from the form
+    sample.email = "user@example.com"
+    sample.deliver
 
-        assert_equal 1, ActionMailer::Base.deliveries.size
-        mail = ActionMailer::Base.deliveries.last
+    assert_equal 1, ActionMailer::Base.deliveries.size
+    mail = ActionMailer::Base.deliveries.last
 
-        assert_equal ["user@example.com"], mail.from
-        assert_match "Email: user@example.com", mail.body.encoded
-    end
+    assert_equal ["user@example.com"], mail.from
+    assert_match "Email: user@example.com", mail.body.encoded
+  end
 
-    test "sample mail has name and email as attributes" do
-        sample = SampleMail.new
-        sample.name = "User"
-        assert_equal "User", sample.name
-        sample.email = "user@example.com"
-        assert_equal "user@example.com", sample.email
+  test "sample mail can ask if an attribute is present or not" do
+    sample = SampleMail.new
+    assert !sample.name?
 
-        sample.clear_name
-        sample.clear_email
-        assert_nil sample.name
-        assert_nil sample.email
+    sample.name = "User"
+    assert sample.name?
 
-        sample2 = SampleMail.new
-        assert !sample2.name?
+    sample.email = ""
+    assert !sample.email?
+  end
 
-        sample2.name = "User"
-        assert sample2.name?
+  test "sample mail can clear attributes using clear_ prefix" do
+    sample = SampleMail.new
 
-        sample2.email = ""
-        assert !sample2.email?
+    sample.name  = "User"
+    sample.email = "user@example.com"
+    assert_equal "User", sample.name
+    assert_equal "user@example.com", sample.email
 
-        assert_equal false, sample.email.present?
+    sample.clear_name
+    sample.clear_email
+    assert_nil sample.name
+    assert_nil sample.email
+  end
 
-    end
-
+  test "sample mail has name and email as attributes" do
+    sample = SampleMail.new
+    sample.name = "User"
+    assert_equal "User", sample.name
+    sample.email = "user@example.com"
+    assert_equal "user@example.com", sample.email
+  end
 end
