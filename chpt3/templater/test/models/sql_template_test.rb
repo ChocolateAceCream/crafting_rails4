@@ -25,11 +25,11 @@ class SqlTemplateTest < ActiveSupport::TestCase
         assert_kind_of ActionView::Template, template
 
         #4) Assert specific information about the found template
-        assert_equal "<%+ 'Hi from SqlTemplate!' %>", tempalte.source
+        assert_equal "<%= 'Hi from SqlTemplate!' %>", template.source
         assert_kind_of ActionView::Template::Handlers::ERB, template.handler
         assert_equal [:html], template.formats
         assert_equal "posts/index", template.virtual_path
-        assert_match %r[SqlTemplate - \d+ - "posts/index"], template.indentifier
+        assert_match %r[SqlTemplate - \d+ - "posts/index"], template.identifier
     end
   # test "the truth" do
   #   assert true
