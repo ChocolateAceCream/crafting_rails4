@@ -1,17 +1,17 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "handlers/version"
+require "live_assets/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "handlers"
-  s.version     = Handlers::VERSION
+  s.name        = "live_assets"
+  s.version     = LiveAssets::VERSION
   s.authors     = ["ChocolateAceCream"]
   s.email       = [""]
-  s.homepage    = "http://www.google.com"
-  s.summary     = "Summary of Handlers."
-  s.description = "Description of Handlers."
+  s.homepage    = "http://www.TODO.com"
+  s.summary     = "Summary of LiveAssets."
+  s.description = "Description of LiveAssets."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
@@ -19,4 +19,5 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 5.0.1"
 
   s.add_development_dependency "sqlite3"
+  s.add_development_dependency "puma"
 end
