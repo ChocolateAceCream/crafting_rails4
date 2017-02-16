@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-    #get "live_assets/:action", to: "live_assets#hello"
+    get "live_assets/:action", to: "live_assets#hello"
 end

@@ -6,8 +6,8 @@
 # We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/jvrails2 for more book information.
 #---
-module LiveAssetsHelper
-  def live_assets
-    javascript_include_tag "live_assets/application"
+class HomeController < ApplicationController
+  def index
+    render html: '<strong>HTML</strong>',  layout: true, steam: true
   end
 end
